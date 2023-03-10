@@ -26,7 +26,7 @@ kubeVersion: ""
 nameOverride: ""
 ## @param fullnameOverride String to fully override common.names.fullname template with a string
 ##
-fullnameOverride: ""
+fullnameOverride: "app-db"
 ## @param namespaceOverride String to fully override common.names.namespace
 ##
 namespaceOverride: ""
@@ -242,7 +242,7 @@ rootUser:
   ## Password is ignored if existingSecret is specified.
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera#setting-the-root-password-on-first-run
   ##
-  password: ""
+  password: "root"
   ## @param rootUser.forcePassword Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
   ## If it is not force, a random password will be generated.
   ##
@@ -275,7 +275,7 @@ db:
   ## @param db.name Name for new database to create
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera#creating-a-database-on-first-run
   ##
-  name: my_database
+  name: ""
   ## @param db.forcePassword Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
   ## If it is not force, a random password will be generated.
   ##
@@ -469,6 +469,7 @@ mariadbConfiguration: |-
 
   [mariadb]
   plugin_load_add=auth_pam
+  plugin_load_add=auth_ed25519
 
   ## Data-at-Rest Encryption
   ## Use extraVolumes and extraVolumeMounts to mount /encryption filesystem
